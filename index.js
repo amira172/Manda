@@ -1,3 +1,22 @@
+const { Client, Util } = require('discord.js');
+const { TOKEN, PREFIX, GOOGLE_API_KEY } = require('./config');
+const YouTube = require('simple-youtube-api');
+const ytdl = require('ytdl-core');
+
+const client = new Client({ disableEveryone: true });
+
+const youtube = new YouTube(GOOGLE_API_KEY);
+
+const queue = new Map();
+
+client.on('warn', console.warn);
+
+client.on('error', console.error);
+
+client.on('ready', () => console.log(`${client.user.username} is ready sir!`));
+
+client.on('disconnect', () => console.log(`just disconnected, making sure you know, I will reconnect now...`));
+
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
 
 client.on('message', async msg => { // eslint-disable-line
@@ -107,7 +126,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		return msg.channel.send('There is nothing playing.');
 	}
 
-	return undefined;
+	 return undefined;
 });
 
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
